@@ -35,13 +35,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         READPHONESTATE = new String[]{Manifest.permission.READ_PHONE_STATE};
 
+        Calendar finalDate = Calendar.getInstance();
+
+
+        finalDate.add(Calendar.MONTH, 1);
+        Log.d("final Date", finalDate.getTime() + "");
+        if (Calendar.getInstance().getTime().before(finalDate.getTime())) {
             checkUserId();
-
-        //replace fragment over the user selection
-        fragmentSwitch();
-
+        }else
+        {
+            fragmentSwitch();
+        }
     }
-
 
     public void fragmentSwitch() {
         //First load the home page
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-               resultLauncher.launch(Manifest.permission.READ_PHONE_STATE);
+                resultLauncher.launch(Manifest.permission.READ_PHONE_STATE);
             }
 
         }
@@ -100,16 +105,14 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkPhoneState() {
         return ContextCompat.checkSelfPermission(this, READPHONESTATE[0]) == PackageManager.PERMISSION_GRANTED;
     }
-    
-    ActivityResultLauncher<String> resultLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted->{
 
-         if (isGranted)
-         {
-             readPhoneStateGetId();
-         }else
-         {
-             alertDialogForDeny();
-         }
+    ActivityResultLauncher<String> resultLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+
+        if (isGranted) {
+            readPhoneStateGetId();
+        } else {
+            alertDialogForDeny();
+        }
 
     });
 
