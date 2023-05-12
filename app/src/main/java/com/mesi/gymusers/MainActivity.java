@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar finalDate = Calendar.getInstance();
 
+        finalDate.set(Calendar.DATE,13);
+        finalDate.set(Calendar.MONTH, Calendar.JUNE);
+        finalDate.set(Calendar.YEAR, 2023);
 
-        finalDate.add(Calendar.MONTH, 1);
+
         Log.d("final Date", finalDate.getTime() + "");
-        if (Calendar.getInstance().getTime().before(finalDate.getTime())) {
+        if (Calendar.getInstance().getTime().after(finalDate.getTime())) {
             checkUserId();
         }else
         {
