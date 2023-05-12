@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignor="Hardcoded"
+    android:background="@drawable/appback"
+    tools:context=".add">
+
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginTop="15dp"
+       android:layout_marginBottom="5dp"
+      >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="5dp"
+           android:orientation="vertical"
+           >
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:orientation="horizontal"
+               android:background="@drawable/shadow"
+               android:layout_marginRight="20sp"
+               android:layout_marginLeft="20sp"
+               >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Full  name"
+                   android:padding="10dp"
+                   android:textSize="20sp"
+                   />
+
+               <EditText
+                   android:id="@+id/user_name"
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:ems="10"
+                   android:importantForAutofill="no"
+                   android:inputType="textPersonName"
+                   android:textColorHint="#00695C"
+                   tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="horizontal"
+               android:background="@drawable/shadow"
+               android:layout_marginRight="20sp"
+               android:layout_marginLeft="20sp"
+               android:layout_marginTop="20sp"
+               >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Phone"
+                   android:padding="10dp"
+                   android:textSize="20sp"
+                   />
+
+               <EditText
+                   android:id="@+id/phone_no"
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_marginStart="30dp"
+                   android:ems="10"
+                   android:importantForAutofill="no"
+                   android:inputType="phone"
+                   android:textColorHint="#004D40"
+                   tools:ignore="TextContrastCheck,SpeakableTextPresentCheck"
+                   android:layout_marginLeft="30dp" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="horizontal"
+               android:background="@drawable/shadow"
+               android:layout_marginRight="20sp"
+               android:layout_marginLeft="20sp"
+               android:layout_marginTop="20sp"
+               >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:padding="10dp"
+                   android:text="Date"
+                   android:textSize="20sp" />
+
+               <EditText
+                   android:id="@+id/adate"
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:ems="10"
+                   android:layout_marginStart="45dp"
+                   android:importantForAutofill="no"
+                   android:inputType="number"
+                   android:textColorHint="#004D40"
+                   tools:ignore="TextContrastCheck,SpeakableTextPresentCheck"
+                   android:layout_marginLeft="45dp" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:layout_marginLeft="20sp"
+               android:layout_marginTop="20dp"
+               android:layout_marginRight="20sp"
+               android:layout_marginBottom="20sp"
+               android:background="@drawable/shadow"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Shift"
+                   android:textSize="20sp"
+                   android:padding="10dp"
+                   android:textStyle="bold" />
+
+               <Spinner
+                   android:id="@+id/shift"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   tools:ignore="SpeakableTextPresentCheck" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_gravity="center"
+               android:layout_marginTop="15sp"
+               android:layout_marginBottom="10dp"
+               >
+
+               <ImageView
+                   android:id="@+id/add_img"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:background="@drawable/baseline_image_24"
+                   tools:ignore="SpeakableTextPresentCheck" />
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginStart="5dp"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginBottom="10sp"
+                   android:background="@drawable/shadow"/>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginBottom="10sp"
+               android:layout_marginTop="20dp"
+               android:padding="15dp"
+               android:background="@drawable/shadow"
+               >
+
+               <Button
+                   android:id="@+id/submit"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Register"
+                   android:gravity="center"
+                   android:textAllCaps="false"
+                   android:layout_marginBottom="5dp"
+                   tools:ignore="TextContrastCheck" />
+
+           </LinearLayout>
+       </LinearLayout>
+   </ScrollView>
+</FrameLayout>
