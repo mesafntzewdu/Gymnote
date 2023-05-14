@@ -110,12 +110,12 @@ public class money extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
         {
             try {
-                Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 i.setData(Uri.fromParts("package", requireActivity().getPackageName(), null));
                 startActivity(i);
             }catch (Exception e)
             {
-                Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                // i.setData(Uri.fromParts("package", requireActivity().getPackageName(), null));
                 startActivity(i);
             }
