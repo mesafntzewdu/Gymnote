@@ -256,7 +256,7 @@ public class add extends Fragment {
                 try {
                     if (!Environment.isExternalStorageManager())
                     {
-                        Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                        Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                         Uri uri = Uri.fromParts("package", requireActivity().getPackageName(), null);
                         i.setData(uri);
                         startActivity(i);
@@ -264,7 +264,7 @@ public class add extends Fragment {
                 }catch (Exception e)
                 {
                     e.printStackTrace();
-                    Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                    Intent i = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                     startActivity(i);
 
                 }
