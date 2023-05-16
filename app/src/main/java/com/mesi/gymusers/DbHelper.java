@@ -24,6 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("create table users(id INTEGER primary key, fname TEXT, phone TEXT, date TEXT, shift TEXT, img TEXT)");
+        db.execSQL("create table permissions(id INTEGER primary key, u_id TEXT)");
     }
 
     @Override
@@ -181,4 +182,58 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return val;
     }
+
+
+    public boolean  permissionExists(){
+        db = this.getReadableDatabase();
+
+        Cursor c = db.rawQuery("select * from permissions", null);
+
+        if(c.getCount()>0)
+        {
+            return true;
+        }
+        //String val = String.valueOf(c.getCount());
+
+        db.close();
+        c.close();
+
+        return false;
+    }
+
+    public void insertPermission(String key){
+
+        ContentValues c = new ContentValues();
+        c.put("u_id", key);
+
+        try{
+            db = this.getWritableDatabase();
+            db.insert("permissions", null, c);
+
+        }catch (Exception e){
+
+        }finally {
+            if (db.isOpen())
+                db.close();
+        }
+    }
+
+    public String getKey(){
+        db = this.getReadableDatabase();
+
+        Cursor c = db.rawQuery("select * from permissions", null);
+        String val = null;
+        if (c.getCount()>0)
+        {
+            c.moveToFirst();
+             val = String.valueOf(c.getString(1));
+        }
+
+        db.close();
+        c.close();
+
+        return val;
+    }
+
+
 }

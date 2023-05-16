@@ -10,11 +10,15 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -23,8 +27,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Calendar;
-import java.util.Date;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,19 +47,20 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar finalDate = Calendar.getInstance();
 
-        finalDate.set(Calendar.DATE,13);
+        finalDate.set(Calendar.DATE, 13);
         finalDate.set(Calendar.MONTH, Calendar.JUNE);
         finalDate.set(Calendar.YEAR, 2023);
 
 
         Log.d("final Date", finalDate.getTime() + "");
-        if (Calendar.getInstance().getTime().after(finalDate.getTime())) {
+        if (Calendar.getInstance().getTime().after(finalDate.getTime()) || !(new DbHelper(this).permissionExists())) {
             checkUserId();
-        }else
-        {
+        } else {
             fragmentSwitch();
         }
+
     }
+
 
     public void fragmentSwitch() {
         //First load the home page
@@ -98,9 +108,7 @@ public class MainActivity extends AppCompatActivity {
             readPhoneStateGetId();
         } else {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                resultLauncher.launch(Manifest.permission.READ_PHONE_STATE);
-            }
+            resultLauncher.launch(Manifest.permission.READ_PHONE_STATE);
 
         }
 
@@ -133,17 +141,58 @@ public class MainActivity extends AppCompatActivity {
 
     private void lockScreen() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage("ለማስከፈት በዚ ስልክ ይደውሉ\n0916073333\n0703747672\nID:" + getIMEIDeviceId(this));
         alert.setCancelable(false);
 
+        LayoutInflater inflater = getLayoutInflater();
+
+        View v = inflater.inflate(R.layout.activation_dialog, null);
+
+        TextView divId;
+        EditText userIn;
+        Button actiate;
+
+
+        divId = v.findViewById(R.id.device_id);
+        userIn = v.findViewById(R.id.user_key);
+        actiate = v.findViewById(R.id.activate_u);
+
+        divId.setText(getIMEIDeviceId(this));
+        actiate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userInVal = userIn.getText().toString().trim();
+
+                if(insertUserKyIfMatchs(userInVal))
+                {
+                    insertUserKey();
+                    recreate();
+                }else
+                {
+                    Toast.makeText(MainActivity.this, "Invalid activation key.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        alert.setView(v);
         AlertDialog dialog = alert.create();
         dialog.show();
+    }
+
+    private boolean insertUserKyIfMatchs(String userInVal) {
+
+        String val = encrypt(getIMEIDeviceId(this));
+
+        Log.d("jldsjfksdfsdkfjdskf", val);
+
+        return userInVal.equals(val.substring(0,10));
     }
 
     private void readPhoneStateGetId() {
 
 
-        if (getIMEIDeviceId(this).equals("0ec1d940b1023fb4")) {
+        String val = encrypt(getIMEIDeviceId(this));
+
+        if (val.substring(0,10).equals(getencryptedKey())) {
 
             fragmentSwitch();
 
@@ -178,7 +227,75 @@ public class MainActivity extends AppCompatActivity {
                 deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
             }
         }
+
+
+        Log.d("device id", deviceId);
+
         return deviceId;
     }
 
+    private static final String CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";
+    private static final String KEY_ALGORITHM = "AES";
+    private static final String SECRET_KEY = "1234567812121921";
+
+    public static String encrypt(String plainText) {
+
+        try {
+            SecretKeySpec keySpec = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), KEY_ALGORITHM);
+            Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec);
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static String decrypt(String encryptedText) {
+        try {
+
+            SecretKeySpec keySpec = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), KEY_ALGORITHM);
+            Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+            cipher.init(Cipher.DECRYPT_MODE, keySpec);
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText);
+            byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+            return new String(decryptedBytes, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    //insert permission to db
+    private String getencryptedKey() {
+
+        DbHelper db = new DbHelper(this);
+
+        return db.getKey();
+    }
+
+    private void insertUserKey() {
+
+        DbHelper db = new DbHelper(this);
+        if (db.permissionExists())
+        {
+
+        }else
+        {
+
+            String val = encrypt(getIMEIDeviceId(this));
+
+            db.insertPermission(val.substring(0,10));
+        }
+
+    }
+
+
 }
+
+
+
