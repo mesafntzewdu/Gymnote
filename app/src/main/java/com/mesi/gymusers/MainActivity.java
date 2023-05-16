@@ -4,7 +4,9 @@ package com.mesi.gymusers;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -150,11 +152,21 @@ public class MainActivity extends AppCompatActivity {
         TextView divId;
         EditText userIn;
         Button actiate;
+        TextView telegramLink;
 
 
         divId = v.findViewById(R.id.device_id);
         userIn = v.findViewById(R.id.user_key);
         actiate = v.findViewById(R.id.activate_u);
+        telegramLink = v.findViewById(R.id.telegramLink);
+
+        telegramLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+khg5yXVGrv04NzJk"));
+                startActivity(i);
+            }
+        });
 
         divId.setText(getIMEIDeviceId(this));
         actiate.setOnClickListener(new View.OnClickListener() {
@@ -181,8 +193,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean insertUserKyIfMatchs(String userInVal) {
 
         String val = encrypt(getIMEIDeviceId(this));
-
-        Log.d("jldsjfksdfsdkfjdskf", val);
 
         return userInVal.equals(val.substring(0,10));
     }
