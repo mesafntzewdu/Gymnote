@@ -47,6 +47,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // https://mvnrepository.com/artifact/com.squareup.picasso/picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation 'com.opencsv:opencsv:5.7.1'
 

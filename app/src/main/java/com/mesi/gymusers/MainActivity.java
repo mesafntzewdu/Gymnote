@@ -4,7 +4,9 @@ package com.mesi.gymusers;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -47,18 +49,22 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar finalDate = Calendar.getInstance();
 
-        finalDate.set(Calendar.DATE, 13);
+        finalDate.set(Calendar.DATE, 15);
         finalDate.set(Calendar.MONTH, Calendar.JUNE);
         finalDate.set(Calendar.YEAR, 2023);
 
+        if (!(new DbHelper(this).permissionExists())) {
+            Log.d("final Date", finalDate.getTime() + "");
+            if (Calendar.getInstance().getTime().after(finalDate.getTime())) {
 
-        Log.d("final Date", finalDate.getTime() + "");
-        if (Calendar.getInstance().getTime().after(finalDate.getTime()) || !(new DbHelper(this).permissionExists())) {
-            checkUserId();
+                checkUserId();
+            } else {
+                fragmentSwitch();
+            }
+
         } else {
             fragmentSwitch();
         }
-
     }
 
 
@@ -150,11 +156,21 @@ public class MainActivity extends AppCompatActivity {
         TextView divId;
         EditText userIn;
         Button actiate;
+        TextView telegramLink;
 
 
         divId = v.findViewById(R.id.device_id);
         userIn = v.findViewById(R.id.user_key);
         actiate = v.findViewById(R.id.activate_u);
+        telegramLink = v.findViewById(R.id.telegramLink);
+
+        telegramLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+khg5yXVGrv04NzJk"));
+                startActivity(i);
+            }
+        });
 
         divId.setText(getIMEIDeviceId(this));
         actiate.setOnClickListener(new View.OnClickListener() {
@@ -162,12 +178,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userInVal = userIn.getText().toString().trim();
 
-                if(insertUserKyIfMatchs(userInVal))
-                {
+                if (insertUserKyIfMatchs(userInVal)) {
                     insertUserKey();
                     recreate();
-                }else
-                {
+                } else {
                     Toast.makeText(MainActivity.this, "Invalid activation key.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -182,9 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         String val = encrypt(getIMEIDeviceId(this));
 
-        Log.d("jldsjfksdfsdkfjdskf", val);
-
-        return userInVal.equals(val.substring(0,10));
+        return userInVal.equals(val.substring(0, 10));
     }
 
     private void readPhoneStateGetId() {
@@ -192,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
         String val = encrypt(getIMEIDeviceId(this));
 
-        if (val.substring(0,10).equals(getencryptedKey())) {
+        if (val.substring(0, 10).equals(getencryptedKey())) {
 
             fragmentSwitch();
 
@@ -281,15 +293,13 @@ public class MainActivity extends AppCompatActivity {
     private void insertUserKey() {
 
         DbHelper db = new DbHelper(this);
-        if (db.permissionExists())
-        {
+        if (db.permissionExists()) {
 
-        }else
-        {
+        } else {
 
             String val = encrypt(getIMEIDeviceId(this));
 
-            db.insertPermission(val.substring(0,10));
+            db.insertPermission(val.substring(0, 10));
         }
 
     }

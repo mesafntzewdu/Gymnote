@@ -312,7 +312,7 @@ public class add extends Fragment {
                 File file = new File(Environment.getExternalStorageDirectory() + "/Gym_Data/file/", "gym_img" + cal.getTimeInMillis() + ".png");
                 FileOutputStream fout = new FileOutputStream(file);
 
-                bml.compress(Bitmap.CompressFormat.PNG, 85, fout);
+                bml.compress(Bitmap.CompressFormat.PNG, 25, fout);
 
                 //save image absolute path in the local variable to store on the database
                 imageAbsolutePath = file.getAbsolutePath();

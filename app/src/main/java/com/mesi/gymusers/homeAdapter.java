@@ -10,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -54,7 +57,8 @@ public class homeAdapter extends BaseAdapter {
         flag.setImageResource(R.drawable.g);
 
         ImageView uPro = v.findViewById(R.id.uImg);
-        uPro.setImageBitmap(BitmapFactory.decodeFile(userList.get(i).getImg()));
+
+        Picasso.get().load(new File(userList.get(i).getImg())).into(uPro);
 
         if (calculateUserReDate(userList.get(i).getDate())<3)
             flag.setImageResource(R.drawable.r);

@@ -1,89 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="ለማስከፈት በዚ ስልክ ይደውሉ"
-        android:padding="10dp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        android:textColor="@color/green"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0916073333"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:text="0938654940"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        android:textColor="@color/green"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0703747672"
-        android:padding="10dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/green"
-        />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:orientation="horizontal"
-        >
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:padding="10dp"
+            android:src="@drawable/tg" />
+
+        <TextView
+            android:id="@+id/telegramLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Confirm through telegram"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:padding="1dp"
             android:text="ID:"
-            android:textSize="18sp"
             android:textColor="@color/green"
-            />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/device_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:padding="10dp"
+            android:padding="1dp"
+            android:textColor="@color/black"
             android:textSize="18sp"
-            android:textColor="@color/green"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:orientation="horizontal"
-        >
+        android:padding="10dp">
+
         <EditText
             android:id="@+id/user_key"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/activate_u"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Activate"
             android:inputType="textPersonName"
-            android:textAllCaps="false"/>
+            android:text="Activate"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
