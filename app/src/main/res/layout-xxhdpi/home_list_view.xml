@@ -1,71 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10sp"
-    android:background="@drawable/shadow"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray91"
+    android:padding="10sp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start|left|center"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:elevation="25dp"
+        android:padding="5dp"
         >
-
-        <TextView
-            android:id="@+id/fname"
-            android:layout_width="110sp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User name"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            />
+            android:layout_gravity="start|center"
+            >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/fname"
+                android:layout_width="110sp"
+                android:layout_height="wrap_content"
+                android:text="User name"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="25dp">
-        <TextView
-            android:id="@+id/ldate"
-            android:layout_width="100sp"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="style"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            />
-    </LinearLayout>
+            android:layout_marginStart="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp">
+            <TextView
+                android:id="@+id/ldate"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:text="style"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_gravity="end|center"
-        android:layout_marginRight="60dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:layout_gravity="end|center"
+            android:layout_marginRight="60dp">
 
-    <ImageView
-        android:id="@+id/flag"
-        android:layout_width="15sp"
-        android:layout_height="15sp"
-        android:src="@drawable/g"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|center">
+            <ImageView
+                android:id="@+id/flag"
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:src="@drawable/g"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center">
 
-        <ImageView
-            android:id="@+id/uImg"
-            android:layout_width="55sp"
-            android:layout_height="55sp"
-            android:src="@drawable/g"
+            <ImageView
+                android:id="@+id/uImg"
+                android:layout_width="55sp"
+                android:layout_height="55sp"
+                android:src="@drawable/g"
 
-            />
-    </LinearLayout>
-
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>

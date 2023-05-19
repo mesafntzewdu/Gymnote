@@ -309,10 +309,10 @@ public class add extends Fragment {
             if (createFolder()) {
 
                 Calendar cal = Calendar.getInstance();
-                File file = new File(Environment.getExternalStorageDirectory() + "/Gym_Data/file/", "gym_img" + cal.getTimeInMillis() + ".png");
+                File file = new File(Environment.getExternalStorageDirectory() + "/Gym_Data/file/", "gym_img" + cal.getTimeInMillis() + ".jpeg");
                 FileOutputStream fout = new FileOutputStream(file);
 
-                bml.compress(Bitmap.CompressFormat.PNG, 25, fout);
+                bml.compress(Bitmap.CompressFormat.JPEG, 10, fout);
 
                 //save image absolute path in the local variable to store on the database
                 imageAbsolutePath = file.getAbsolutePath();

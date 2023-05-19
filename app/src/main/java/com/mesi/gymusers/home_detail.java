@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -84,11 +86,8 @@ public class home_detail extends Fragment {
 
         //get image url from the database and convert it into the bitmap and display it on the image view
         SingleDAO sd = SingleDAO.getSingleDAOInstance();
-        File f = new File(sd.getImg());
-        if (f.isFile() && f.exists()) {
-            Bitmap bm = BitmapFactory.decodeFile(sd.getImg());
-            uImg.setImageBitmap(bm);
-        }
+
+        Picasso.get().load(new File(sd.getImg())).into(uImg);
 
         //Update on click listener
         update.setOnClickListener(new View.OnClickListener() {
